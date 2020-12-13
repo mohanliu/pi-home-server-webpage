@@ -103,7 +103,5 @@ class SystemDataRecording():
             self._db.close()
 
 if __name__ == "__main__":
-    for i in range(10):
-        with SystemDataRecording() as s:
-            s.main()
-        time.sleep(1)
+    with SystemDataRecording() as s:
+        s.main()
