@@ -55,7 +55,7 @@
           <div class="card-body">
             <h5 class="card-title">System Monitor</h5>
             <p class="card-text">Monitor features like temperture, frequence, voltage, etc on my raspberry pi.</p>
-            <a href="test.php" class="btn btn-primary">Enter</a>
+            <a href="monitor.php" class="btn btn-primary">Enter</a>
           </div>
         </div>
       </div>
