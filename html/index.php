@@ -23,21 +23,18 @@
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://mohanliu.github.io" target="blank_">Link</a>
+            <a class="nav-link" href="https://mohanliu.github.io" target="blank_">My Page</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
+              Projects 
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Smart Car control</a>
+              <a class="dropdown-item" href="#">System Monitor Panel</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Source Codes</a>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -48,13 +45,29 @@
     </nav>
 
     <div class="jumbotron">
-      <h1 class="display-4">Hello, world!</h1>
-      <p class="lead">This is a Mohan's raspberry pi.</p>
-      <hr class="my-4">
-      <p>It contains many DIY IoT projects.</p>
-      <p class="lead">
-        <a class="btn btn-primary btn-lg" href="https://mohanliu.github.io" role="button">Learn more</a>
-      </p>
+      <h2 class="display-4 text-center">Welcome to Mohan's Raspberry Pi!</h2>
+      <p class="lead text-center">This is a mini server hosted on my raspberry pi contain many DIY IoT projects.</p>
+    </div>
+
+    <div class="row" id="projects" style="margin:2%">
+      <div class="col-sm-6" style="margin-top:2%">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">System Monitor</h5>
+            <p class="card-text">Monitor features like temperture, frequence, voltage, etc on my raspberry pi.</p>
+            <a href="test.php" class="btn btn-primary">Enter</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6" style="margin-top:2%">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Smart Car Control</h5>
+            <p class="card-text">Control my smart car from Internet.</p>
+            <a href="#" class="btn btn-primary" disabled>Enter</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Optional JavaScript -->
