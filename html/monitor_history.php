@@ -1,6 +1,26 @@
-<?php header("refresh: 10000")?> 
+<?php
+# Loading config data from *.ini-file
+$ini = parse_ini_file ('/home/pi/cfg/db_config.ini');
+
+# Assigning the ini-values to usable variables
+$db_host = $ini['db_host'];
+$db_name = $ini['db_name'];
+$db_user = $ini['db_user'];
+$db_password = $ini['db_password'];
+
+# Prepare a connection to the mySQL database
+$connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+
+# prepare a query to the mysql database 
+$sql = "select * from pitemp";
+$result = $connection->query($sql);
+
+# last temperature 
+$last_temp_sql = "select * from pitemp order by created_at desc limit 1";
+$last_temp_result = $connection->query($last_temp_sql);
+?>
 <!DOCTYPE html>
-<html>
+ <html>
       <head>
            <title>System Monitor</title>
            <meta charset="utf-8">
@@ -16,55 +36,29 @@
            </style>
            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
            <script type="text/javascript">
-           google.charts.load('current', {'packages':['gauge']});
+           google.charts.load('current', {'packages':['corechart']});
            google.charts.setOnLoadCallback(drawChart);
            function drawChart()
            {
-                var data_temp_gauge = google.visualization.arrayToDataTable([
-        		  ['Label', 'Value'],
-			  ['Temperature', 
-				<?php 
-                                $f = fopen("/sys/class/thermal/thermal_zone0/temp","r");
-                                $temp = fgets($f);
-                                echo $temp/1000;
-                                fclose($f);
-                                ?>
-		          ],
-        		]);
+                var data = google.visualization.arrayToDataTable([
+                          ['Time', 'Temperature'],
+                          <?php
+                          while($row = mysqli_fetch_array($result))
+                          {
+                               echo "['".$row["created_at"]."', ".$row["temperature"]."],";
+                          }
+                          ?>
+                     ]);
 
-        	var options_temp_gauge = {
-			  width: 600, height: 400,
-        		  redFrom: 70, redTo: 80,
-        		  yellowFrom: 55, yellowTo: 80,
-			  min: 20, max:80,
-        		  minorTicks: 5
-        		};
-
-                var data_mem_gauge = google.visualization.arrayToDataTable([
-        		  ['Label', 'Value'],
-			  ['Memory', 
-				<?php 
-                                $f = fopen("/sys/class/thermal/thermal_zone0/temp","r");
-                                $temp = fgets($f);
-                                echo $temp/1000;
-                                fclose($f);
-                                ?>
-		          ],
-        		]);
-
-        	var options_mem_gauge = {
-			  width: 600, height: 400,
-        		  redFrom: 70, redTo: 80,
-        		  yellowFrom: 55, yellowTo: 80,
-			  min: 20, max:80,
-        		  minorTicks: 5
-        		};
-
-        	var chart_temp_gauge = new google.visualization.Gauge(document.getElementById('chart_div_0'));
-        	var chart_mem_gauge = new google.visualization.Gauge(document.getElementById('chart_div_1'));
-
-        	chart_temp_gauge.draw(data_temp_gauge, options_temp_gauge);
-        	chart_mem_gauge.draw(data_mem_gauge, options_mem_gauge);
+		// Curved line
+		var options = {
+			title: 'Temperature',
+			curveType: 'function',
+			legend: { position: 'bottom' }
+			};
+		// Curved chart
+		var chart = new google.visualization.LineChart(document.getElementById('chart_div_1'));
+                chart.draw(data, options);
            }
            </script>
       </head>
@@ -76,22 +70,17 @@
              </button>
              <div class="collapse navbar-collapse" id="navbarNav">
                <ul class="navbar-nav">
-                 <li class="nav-item active">
+                 <li class="nav-item">
                    <a class="nav-link" href="monitor.php">Live</a>
                  </li>
-                 <li class="nav-item">
+                 <li class="nav-item active">
                    <a class="nav-link" href="monitor_history.php">History</a>
                  </li>
                </ul>
              </div>
            </nav>
-           <div class="row">
-           	<div class="col-md-4" style="width: 100%;">
-                    <div id="chart_div_0" style="width: 100%;"></div>
-           	</div>
-           	<div class="col-md-4" style="width: 100%;">
-                    <div id="chart_div_1" style=""></div>
-           	</div>
+           <div style="width: 100%;">
+                <div id="chart_div_1" style="width: 50%; height: 500px;"></div>
            </div>
 
 	   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
