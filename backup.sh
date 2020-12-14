@@ -1,3 +1,7 @@
 #! /bin/bash
 
-cp -r /var/www/html/* ./html 
+for file in `find /var/www/html/ -user root`
+    do
+    echo "Copying " $file "..."
+    cp $file ./html
+done
