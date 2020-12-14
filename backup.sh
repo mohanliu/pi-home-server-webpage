@@ -5,3 +5,5 @@ for file in `find /var/www/html/ -user root`
     echo "Copying " $file "..."
     cp $file ./html
 done
+
+cp ~/bin/* bin 
