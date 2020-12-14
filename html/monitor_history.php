@@ -15,9 +15,6 @@ $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
 $sql = "select * from pitemp";
 $result = $connection->query($sql);
 
-# last temperature 
-$last_temp_sql = "select * from pitemp order by created_at desc limit 1";
-$last_temp_result = $connection->query($last_temp_sql);
 ?>
 <!DOCTYPE html>
  <html>
@@ -79,8 +76,8 @@ $last_temp_result = $connection->query($last_temp_sql);
                </ul>
              </div>
            </nav>
-           <div style="width: 100%;">
-                <div id="chart_div_1" style="width: 50%; height: 500px;"></div>
+           <div style="width: 100%; height: 90vh">
+                <div id="chart_div_1" style="width: 100%; height: 100%;"></div>
            </div>
 
 	   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

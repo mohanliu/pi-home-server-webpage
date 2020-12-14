@@ -1,4 +1,4 @@
-<?php header("refresh: 10000")?> 
+<?php header("refresh: 5")?> 
 <!DOCTYPE html>
 <html>
       <head>
@@ -24,10 +24,12 @@
         		  ['Label', 'Value'],
 			  ['Temperature', 
 				<?php 
-                                $f = fopen("/sys/class/thermal/thermal_zone0/temp","r");
-                                $temp = fgets($f);
-                                echo $temp/1000;
-                                fclose($f);
+                                // remember to add www-data to group video by:
+                                // sudo usermod -aG video www-data   
+				// also, give executable permission to others 
+				// for the following script
+				$temp = exec("/home/pi/bin/get_raw_temp.sh");
+                                echo $temp;
                                 ?>
 		          ],
         		]);
@@ -44,27 +46,45 @@
         		  ['Label', 'Value'],
 			  ['Memory', 
 				<?php 
-                                $f = fopen("/sys/class/thermal/thermal_zone0/temp","r");
-                                $temp = fgets($f);
-                                echo $temp/1000;
-                                fclose($f);
+				$mem = exec("/home/pi/bin/get_mem_perc.sh");
+                                echo $mem;
                                 ?>
 		          ],
         		]);
 
         	var options_mem_gauge = {
 			  width: 600, height: 400,
-        		  redFrom: 70, redTo: 80,
-        		  yellowFrom: 55, yellowTo: 80,
-			  min: 20, max:80,
+        		  redFrom: 90, redTo: 100,
+        		  yellowFrom: 80, yellowTo: 90,
+			  min: 0, max: 100,
+        		  minorTicks: 5
+        		};
+
+                var data_clock_gauge = google.visualization.arrayToDataTable([
+        		  ['Label', 'Value'],
+			  ['Frequency', 
+				<?php 
+				$freq = exec("/home/pi/bin/get_clock_freq.sh");
+                                echo $freq;
+                                ?>
+		          ],
+        		]);
+
+        	var options_clock_gauge = {
+			  width: 600, height: 400,
+        		  redFrom: 1.5, redTo: 1.8,
+        		  yellowFrom: 1.2, yellowTo: 1.5,
+			  min: 0, max: 1.8,
         		  minorTicks: 5
         		};
 
         	var chart_temp_gauge = new google.visualization.Gauge(document.getElementById('chart_div_0'));
         	var chart_mem_gauge = new google.visualization.Gauge(document.getElementById('chart_div_1'));
+        	var chart_clock_gauge = new google.visualization.Gauge(document.getElementById('chart_div_2'));
 
         	chart_temp_gauge.draw(data_temp_gauge, options_temp_gauge);
         	chart_mem_gauge.draw(data_mem_gauge, options_mem_gauge);
+        	chart_clock_gauge.draw(data_clock_gauge, options_clock_gauge);
            }
            </script>
       </head>
@@ -85,12 +105,15 @@
                </ul>
              </div>
            </nav>
-           <div class="row">
+           <div class="row" style="margin:1%">
            	<div class="col-md-4" style="width: 100%;">
                     <div id="chart_div_0" style="width: 100%;"></div>
            	</div>
            	<div class="col-md-4" style="width: 100%;">
                     <div id="chart_div_1" style=""></div>
+           	</div>
+           	<div class="col-md-4" style="width: 100%;">
+                    <div id="chart_div_2" style=""></div>
            	</div>
            </div>
 
