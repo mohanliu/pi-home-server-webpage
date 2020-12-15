@@ -6,4 +6,5 @@ for file in `find /var/www/html/ -user root`
     cp $file ./html
 done
 
+echo "Copying bash scripts..."
 cp ~/bin/* bin 

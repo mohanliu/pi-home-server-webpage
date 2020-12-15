@@ -90,10 +90,60 @@ class SystemDataRecording():
             # Roll the database back to the last good setting
             self._db.rollback()
            
+    def _extract_memory_perc(self):
+        """extract memory percentage from system command"""
+
+        _process = subprocess.Popen(
+                ['free', '-t'],
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE,
+                universal_newlines=True
+        )
+
+        stdout, _ = _process.communicate()
+
+        output_ = [v for v in stdout.split("\n")[3].split(" ") if v != ""]
+
+        return int(output_[2])/int(output_[1])*100
+
+    def _feed_memory_perc(self):
+        """feed memory percentage data into database
+        
+        Original database creation commnds in MySQL:
+        
+        MySQL> CREATE TABLE mem_perc (created_at Datetime, memory FLOAT);
+        
+        """
+
+        # get memory
+        mem_perc = self._extract_memory_perc()
+
+        # sql insertion command
+        insert_cmd_ = "INSERT INTO mem_perc values('{}', {})".format(self._now_datetime, mem_perc)
+        delete_cmd_ = "DELETE FROM mem_perc where created_at < '{}'".format(self._last_checkpoint)
+
+        # start executation
+        cursor = self._db.cursor()
+
+        try:
+            # Write to the database
+            cursor.execute(insert_cmd_)
+            cursor.execute(delete_cmd_)
+
+            # Commit the changes
+            self._db.commit()
+        except Exception as e:
+            print("Error is happening, rolling back")
+            print(e)
+            
+            # Roll the database back to the last good setting
+            self._db.rollback()
+
     def main(self):
         """main function"""
 
         self._feed_temperature()
+        self._feed_memory_perc()
 
     def __enter__(self):
         return self
