@@ -2,39 +2,25 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Display Webcam Stream</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}" />
+<script defer src="{{ url_for('static', filename='face-api.min.js') }}"></script>
  
-<style>
-#container {
-	margin: 0px auto;
-	width: 100%;
-	height: 80vh;
-}
-#videoElement {
-	width: 100vw;
-	height: 80vh;
-}
-</style>
 </head>
  
 <body>
-<div id="container">
-	<video autoplay="true" id="videoElement">
-	
-	</video>
-</div>
-<script>
-var video = document.querySelector("#videoElement");
+  <div id="streamdiv">
+   <video id="video" height="720" width="560" autoplay playsinline></video>
+  </div>
+  <div class="controls">
+    <button id="button">Get camera</button>
+    <select id="select">
+      <option></option>
+    </select>
+  </div>
 
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
-}
-</script>
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
