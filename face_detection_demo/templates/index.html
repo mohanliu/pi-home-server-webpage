@@ -11,8 +11,14 @@
 </head>
  
 <body>
-  <div id="streamdiv">
+<!--   <div id="streamdiv">
    <video id="video" height="720" width="560" autoplay playsinline></video>
+  </div> -->
+  <div class="center-content page-container">
+    <div style="position: relative" class="margin">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="overlay" />
+    </div>
   </div>
   <div class="controls">
     <button id="button">Get camera</button>

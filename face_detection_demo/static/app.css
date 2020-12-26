@@ -1,15 +1,41 @@
-body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.page-container {
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 20px;
+  padding-left: 280px;
+  display: inline-flex !important;
 }
 
-canvas {
+@media only screen and (max-width : 992px) {
+  .page-container {
+    padding-left: 0;
+    display: flex !important;
+  }
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#overlay, .overlay {
   position: absolute;
-  width: 720px;
-  width: 560px;
+  top: 0;
+  left: 0;
+}
+
+#facesContainer canvas {
+  margin: 10px;
+}
+
+.margin-sm {
+  margin: 5px;
+}
+
+.margin {
+  margin: 20px;
 }

@@ -65,20 +65,32 @@ button.addEventListener('click', event => {
 navigator.mediaDevices.enumerateDevices().then(gotDevices);
 
 video.addEventListener('play', () => {
-    const canvas = faceapi.createCanvasFromMedia(video) 
-    var parentNode = document.getElementById("streamdiv")
+    // const canvas = faceapi.createCanvasFromMedia(video) 
+    // var parentNode = document.getElementById("streamdiv")
     
-    parentNode.append(canvas)
+    // parentNode.append(canvas)
 
-    const displaySize = { width: video.height, height: video.width }
-    faceapi.matchDimensions(canvas, displaySize)
+    // const displaySize = { width: video.height, height: video.width }
+    // faceapi.matchDimensions(canvas, displaySize)
+    // setInterval(async () => {
+    //     const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+    //     const resizedDetections = faceapi.resizeResults(detections, displaySize)
+    //     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+    //     faceapi.draw.drawDetections(canvas, resizedDetections)
+    //     // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+    //     // faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+    // }, 500)
+    const canvas = document.getElementById("overlay")
+
+    const dims = faceapi.matchDimensions(canvas, video, true)
+
     setInterval(async () => {
         const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-        const resizedDetections = faceapi.resizeResults(detections, displaySize)
+        const resizedDetections = faceapi.resizeResults(detections, dims)
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
         faceapi.draw.drawDetections(canvas, resizedDetections)
-        // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-        // faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
-    }, 500)
+        faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+        faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+    }, 100)
 })
 
