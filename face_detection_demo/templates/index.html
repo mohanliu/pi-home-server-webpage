@@ -18,13 +18,14 @@
     text-align: center;
     background: #03DAC6;
     padding: 1.5em 0;
+    background-repeat: repeat-x;
   }
 </style>
  
 </head>
  
 <body style="background: #121212">
-  <div class="headercontent" style="text-align: center">
+  <div class="headercontent row justify-content-md-center" style="text-align: center">
     <h1>Webcam Face Detection</h1>
   </div>
   <div class="headercontent row justify-content-md-center">
@@ -44,6 +45,7 @@
     </div>
   </div>
   <div class="headercontent row justify-content-md-center">
+    <div class="col-md-12">
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" id="facedetection" checked>
       <label class="form-check-label" for="facedetection">Box</label>
@@ -59,6 +61,7 @@
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" id="ageandgender">
       <label class="form-check-label" for="ageandgender">Age & Gender<sup>*</sup></label>
+    </div>
     </div>
   </div>
   <div class="center-content page-container">
