@@ -11,11 +11,11 @@
 ## System Monitor
 > This is an app to monitor some key features of my raspberry pi server.
 
-<img src="images/monitorlive.png" style="width: 50%;">
+<img src="images/monitorlive.png" width="400">
 
 *Codes: https://github.com/mohanliu/pi-home-server-webpage/blob/main/html/monitor.php*
 
-<img src="images/monitorhistory.png" style="width: 50%;">
+<img src="images/monitorhistory.png" width="400">
 
 *Codes: https://github.com/mohanliu/pi-home-server-webpage/blob/main/html/monitor_history.php*
 
@@ -33,7 +33,7 @@
 ## Smart Car Control
 > This is a tool kit to control my smart car equiped with a second raspberry pi. 
 
-<img src="images/smartcarcontrol.png" style="width: 50%;">
+<img src="images/smartcarcontrol.png" width="600">
 
 *Codes: https://github.com/mohanliu/raspberry-pi-car-module*
 
@@ -45,7 +45,7 @@
 ## Face Detection Lite
 > A Face Detection App with upload images
 
-<img src="images/facedetectlite.png" style="width: 35%;">
+<img src="images/facedetectlite.png" width="400">
 
 *Codes: https://github.com/mohanliu/face_detection_lite*
 
@@ -56,7 +56,7 @@
 ## Webcam Face Detection
 > A Real-time Face Detection App
 
-<img src="images/facedetect-realtime.gif" style="width: 35%;">
+<img src="images/facedetect-realtime.gif" width="400">
 
 *Codes: https://github.com/mohanliu/pi-home-server-webpage/tree/main/face_detection_demo*
 
@@ -76,7 +76,7 @@
 ## Webcam Object Detection
 > A real-time multi-instance object detection
 
-<img src="images/objectdetection-realtime.gif" style="width: 35%;">
+<img src="images/objectdetection-realtime.gif" width="400">
 
 *Codes: https://github.com/mohanliu/pi-home-server-webpage/blob/main/html/object-detection.php*
 
