@@ -3,6 +3,8 @@
 
 ![Front Page](docs/images/web-page.png)
 
+## [Check out full documentation](./docs)
+
 ## Available apps and sources
 - System monitor: [source1](./html/monitor.php) & [source2](./html/monitor_history.php)
 - Smart car control: [source](https://github.com/mohanliu/raspberry-pi-car-module)
