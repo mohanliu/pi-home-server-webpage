@@ -104,9 +104,9 @@ $result_mem = $connection->query($sql_mem);
                       });
                   
                   if ( current == 0 ) {
-			options['title'] = "Temperature"
+			options['title'] = "Temperature (Celcius)"
                   } else if ( current == 1 ) { 
-			options['title'] = "Memory"
+			options['title'] = "Memory Usage Percentage"
                   }
 
                   chart.draw(data[current], options);
